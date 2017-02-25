@@ -20,7 +20,7 @@
       "styles": [
       ],
       "scripts": [
-        https://aframe.io/releases/0.4.0/aframe.min.js
+        "./src/assets/aframe.min.js"
       ],
       "environmentSource": "environments/environment.ts",
       "environments": {
