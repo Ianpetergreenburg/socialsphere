@@ -1,20 +1,44 @@
 /* global AFRAME */
 
 
-var panels = {
-  group1: {
-    level1:{
-      position: "-3 -2 -3",
-      rotation: "0 45 0"
-    }
-  },
-  group3:{
-    level3:{
-      position: "-2 2 -2",
-      rotation: "0 -45 0"
-    }
-  }
+function panelGroup(panels){
+  this.panels = panels;
 }
+
+function panel(position, rotation){
+  this.position = position;
+  this.rotation = rotation;
+}
+function tuple(x,y,z){
+  return [x,y,z]
+}
+
+var panels = [
+  new panel(new tuple(-3,-2,-3), new tuple(0,45,0)),
+  new panel(new tuple(-3,0,-3), new tuple(0,45,0)),
+  new panel(new tuple(-3,2,-3), new tuple(0,45,0)),
+  new panel(new tuple(0,-2,-3), new tuple(0,45,0)),
+  new panel(new tuple(0,0,-3), new tuple(0,45,0)),
+  new panel(new tuple(0,-2,-3), new tuple(0,45,0)),
+  new panel(new tuple(3,2,-3), new tuple(0,45,0)),
+  new panel(new tuple(3,0,-3), new tuple(0,45,0)),
+  new panel(new tuple(3,2,-3), new tuple(0,45,0))
+]
+
+var scene = {
+  'panelGroups': [
+    new panelGroup([panels[0],panels[1],panels[2]]),
+    new panelGroup([panels[3],panels[4],panels[5]]),
+    new panelGroup([panels[6],panels[7],panels[8]])
+  ]
+}
+
+var init =function(){
+  console.log(scene);
+  console.log(panels[0].rotation)
+}();
+
+
 
 /**
  * Component that listens to an event, fades out an entity, swaps the texture, and fades it
