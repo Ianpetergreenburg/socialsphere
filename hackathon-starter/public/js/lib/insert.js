@@ -17,7 +17,7 @@ $(document).ready(function(){
 
 			
 
-			setInterval(newItem,2000)
+			setInterval(newItem,4000)
 
 
 
@@ -25,20 +25,26 @@ $(document).ready(function(){
 
 			function addImage(){
 				console.log("adding image", counter)
-								$('a-scene').append(`<a-image id="image${counter}" class="img-panel"
+								$('a-scene').append(`<a-image id="image${counter}" class="img-panel link"
 										  src="${data.posts[counter].photos[0].alt_sizes[1].url}"
 	 									  width="10"
 										  height="10" 
 										  position="${x[0]} ${y[0]} ${z[0]} 
-										  rotation="0 0 0" scale=".1 .1 .1">						  									  
+										  rotation="0 0 0" scale=".1 .1 .1"
+										  event-set__1="_event: mousedown; scale: .1 .1 .1"
+										  event-set__2="_event: mouseup; scale: .2 .2 .1"
+										  event-set__3="_event: mouseenter; scale: .2 .2 .1"
+										  event-set__4="_event: mouseleave; scale: .1 .1 .1"
+            							  set-image="on: click; target: #image-360; src: ${data.posts[counter].photos[0].alt_sizes[1].url}"
+										  >						  									  
 										   </a-image>`)
 								for(var i = 0; i < 4; i++){
 								 console.log("appending animation"+y[i])
 								$(`#image${counter}`).append(`
 											<a-animation id="animation${counter}-${i}"
 												attribute="position"
-												delay="${(i+1)*2000}"											                
-												dur="2000"
+												delay="${(i+1)*3000}"											                
+												dur="3000"
 												fill="forward"
 												from="${x[i]} ${y[i]} ${z[i]}"
 												to="${x[i+1]} ${y[i+1]} ${z[i+1]}"
