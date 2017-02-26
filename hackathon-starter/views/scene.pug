@@ -1,16 +1,1 @@
-script
- 	var media = myRecentMedia
-
-h1 SCENE STUFF
-
-p.lead
-  | My Recent
-  strong  Media
-  .row
-  for image in myRecentMedia
-    .col-xs-3
-    p= image
-    a.thumbnail(href=image.link)
-        img(src=image.images.standard_resolution.url, height='320px')
-
 include scenes.html
