@@ -79,7 +79,8 @@ exports.getTumblr = (req, res, next) => {
     token: token.accessToken,
     token_secret: token.tokenSecret
   });
-  client.posts('mmosdotcom.tumblr.com', { type: 'photo' }, (err, data) => {
+  console.log('cliiiiiiieenennet', client)
+  client.blogPosts('mmosdotcom.tumblr.com', { type: 'photo' }, (err, data) => {
     if (err) { return next(err); }
     res.render('api/tumblr', {
       title: 'Tumblr API',
