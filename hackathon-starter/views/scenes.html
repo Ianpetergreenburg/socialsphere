@@ -1,17 +1,4 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title>360&deg; Image Gallery</title>
-    <meta name="description" content="360&deg; Image Gallery - A-Frame">
-    <script src="https://aframe.io/releases/0.4.0/aframe.min.js"></script>
-    <script src="https://npmcdn.com/aframe-animation-component@3.0.1"></script>
-    <script src="https://npmcdn.com/aframe-event-set-component@3.0.1"></script>
-    <script src="https://npmcdn.com/aframe-layout-component@3.0.1"></script>
-    <script src="https://npmcdn.com/aframe-template-component@3.1.1"></script>
-    <script src="components/set-image.js"></script>
-  </head>
-  <body>
+<body>
     <a-scene>
       <a-assets>
         <img id="city" crossorigin="anonymous" src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/city.jpg">
@@ -21,14 +8,11 @@
         <audio id="click-sound" crossorigin="anonymous" src="https://cdn.aframe.io/360-image-gallery-boilerplate/audio/click.ogg"></audio>
         <img id="cubes" crossorigin="anonymous" src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/cubes.jpg">
         <img id="sechelt" crossorigin="anonymous" src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/sechelt.jpg">
-        <img id="test-photo" crossorigin="anonymous" src="test-photo.jpg">
 
-        <!-- The alert box plane setup. -->
-        <img id="blue" crossorigin="anonymous" src="blue.jpg">
         <!-- Image link template to be reused. -->
         <script id="link" type="text/html">
           <a-entity class="link"
-            geometry="primitive: plane; height: 1; width: 4"
+            geometry="primitive: plane; height: 1; width: 1"
             material="shader: flat; src: ${thumb}"
             event-set__1="_event: mousedown; scale: 1 1 1"
             event-set__2="_event: mouseup; scale: 1.2 1.2 1"
@@ -37,44 +21,54 @@
             set-image="on: click; target: #image-360; src: ${src}"
             sound="on: click; src: #click-sound"></a-entity>
         </script>
-
-        <script id="content" type="text/html">
-          <a-entity
-            geometry="primitive: plane; height: 1; width: 4"
-            material="color: black"
-            bmfont-text="width: auto; text: Hello!">
-          </a-entity>
-        </script>
-      </a-assets>
-      <!-- <a-plane color="#CCC" height="1" width="4"></a-plane> -->
-
+    
+        <a-mixin id="red" material="color: red"></a-mixin>
+        <a-mixin id="blue" material="color: blue"></a-mixin>
+        <a-mixin id="cube" geometry="primitive: box"></a-mixin>
+        <a-mixin id="panel-group-1"
+            position="-3 0 -3"
+            rotation="0 45 0">
+        </a-mixin>
+         <a-mixin id="panel-group-2"
+            position="0 0 -4"
+            rotation="0 0 0">
+        </a-mixin>
+         <a-mixin id="panel-group-3"
+            position="3 0 -3"
+            rotation="0 -45 0">
+        </a-mixin>
+                <a-mixin id="panel-level-1"
+            position="-3 0 -3"
+            rotation="0 45 0">
+        </a-mixin>
+         <a-mixin id="panel-level-2"
+            position="0 0 -4"
+            rotation="0 0 0">
+        </a-mixin>
+         <a-mixin id="panel-level-3"
+            position="3 0 -3"
+            rotation="0 -45 0">
+        </a-mixin>
+        <a-mixin id="panel"
+                 geometry="primitive: box; height:1;width:3;depth:0.1;"
+                 text="yOffset:0.0;zOffset:0.1;xOffset:-0.1;color:white; align:center;" 
+                 material="color:blue;"
+                 >      
+        </a-mixin>
+    </a-assets>
       <!-- 360-degree image. -->
       <a-sky id="image-360" radius="10" src="#city"></a-sky>
 
       <!-- Image links. -->
-        <a-entity id="links" layout="type: box; margin: 1.5" position="0 -1 -4">
-        <!-- <a-entity template="src: #link" data-src="#cubes" data-thumb="#cubes-thumb"></a-entity> -->
-          <a-entity template="src: #link" data-src="#city" data-thumb="#city-thumb"></a-entity>
-          <a-entity template="src: #link" data-src="#sechelt" data-thumb="#sechelt-thumb"></a-entity>
-          <a-entity template="src: #link" data-src="orange.png" data-thumb="#blue" geometry="primitive: plane; height: 1; width: 4"
-            material="color: red"
-            text="width: auto; value: H"></a-entity>
-        </a-entity>
-
-      <a-entity id="links" layout="type: box; margin: 1.5" rotation="0 45 0" position="-5 -1 0">
-        <!-- <a-entity template="src: #link" data-src="#cubes" data-thumb="#cubes-thumb"></a-entity> -->
-       <!--  <a-entity template="src: #link" data-src="#city" data-thumb="#city-thumb"></a-entity>
-        <a-entity template="src: #link" data-src="#sechelt" data-thumb="#sechelt-thumb"></a-entity> -->
-        <a-image template="src: #link" data-src="#test-photo" data-thumb="#test-photo" src="orange.png"></a-image>
-      </a-entity>
-
-      <a-entity id="links" layout="type: box; margin: 1.5" rotation="0 -45 0" position="7 -1 -4">
+      <a-entity id="links" layout="type: line; margin: 1.5" position="0 -1 -4">
         <a-entity template="src: #link" data-src="#cubes" data-thumb="#cubes-thumb"></a-entity>
-      <!--   <a-entity template="src: #link" data-src="#city" data-thumb="#city-thumb"></a-entity>
+        <a-entity template="src: #link" data-src="#city" data-thumb="#city-thumb"></a-entity>
         <a-entity template="src: #link" data-src="#sechelt" data-thumb="#sechelt-thumb"></a-entity>
-        <a-image template="src: #link" data-src="#test-photo" data-thumb="#test-photo" src="#test-photo"></a-image> -->
       </a-entity>
 
+<a-text mixin="panel panel-group-1 panel-level-1" value="text here"></a-text>
+<a-text mixin="panel panel-group-2 panel-level-2" value="text here"></a-text>
+<a-text mixin="panel panel-group-3 panel-level-3" value="text here"></a-text>
       <!-- Camera + cursor. -->
       <a-entity camera look-controls>
         <a-cursor id="cursor"
@@ -86,4 +80,3 @@
       </a-entity>
     </a-scene>
   </body>
-</html>
