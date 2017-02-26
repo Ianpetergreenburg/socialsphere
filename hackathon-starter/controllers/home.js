@@ -8,49 +8,19 @@ exports.index = (req, res) => {
   });
 };
 
+exports.scene = (req, res) => {
+  res.render('scene', {
+    title: 'Scene'
+  });
+};
+
 'use strict';
+
 
 const async = require('async');
 const ig = require('instagram-node').instagram();
 const Twit = require('twit');
-
-exports.scene = (req, res, next) => {
-  const token = req.user.tokens.find(token => token.kind === 'instagram');
-  ig.use({ client_id: process.env.INSTAGRAM_ID, client_secret: process.env.INSTAGRAM_SECRET });
-  ig.use({ access_token: token.accessToken });
-
-  async.parallel({
-    searchByUsername: (done) => {
-      ig.user_search('ianpetergreenburg', (err, users) => {
-        done(err, users);
-      });
-    },
-    searchByUserId: (done) => {
-      ig.user('270705528', (err, user) => {
-        done(err, user);
-      });
-    },
-    myLikedMedia: (done) => {
-      ig.user_self_liked((err, medias) => {
-        done(err, medias);
-      });
-    },
-    myRecentMedia: (done) => {
-      ig.user_self_media_recent((err, medias) => {
-        done(err, medias);
-      });
-    }
-  }, (err, results) => {
-    if (err) { return next(err); }
-    res.render('scene', {
-      title: 'Scene',
-      usernames: results,
-      userById: results.searchByUserId,
-      myLikedMedia: results.myLikedMedia,
-      myRecentMedia: results.myRecentMedia
-    });
-  });
-};
+const tumblr = require('tumblr.js');
 
 exports.instagramData = (req, res, next) => {
   const token = req.user.tokens.find(token => token.kind === 'instagram');
@@ -81,5 +51,18 @@ exports.twitterData = (req, res, next) => {
   T.get('/statuses/home_timeline', {count: 10}, (err, reply) => {
     if (err) { return next(err); }
     res.send({tweets: reply});
+  });
+};
+exports.tumblrData = (req, res, next) => {
+  const token = req.user.tokens.find(token => token.kind === 'tumblr');
+  const client = tumblr.createClient({
+    consumer_key: process.env.TUMBLR_KEY,
+    consumer_secret: process.env.TUMBLR_SECRET,
+    token: token.accessToken,
+    token_secret: token.tokenSecret
+  });
+  client.userDashboard({ type: 'photo' }, (err, data) => {
+    if (err) { return next(err); }
+    res.send({posts: data.posts});
   });
 };

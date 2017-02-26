@@ -79,13 +79,12 @@ exports.getTumblr = (req, res, next) => {
     token: token.accessToken,
     token_secret: token.tokenSecret
   });
-  console.log('cliiiiiiieenennet', client)
-  client.blogPosts('mmosdotcom.tumblr.com', { type: 'photo' }, (err, data) => {
+  client.userDashboard({ type: 'photo' }, (err, data) => {
     if (err) { return next(err); }
     res.render('api/tumblr', {
       title: 'Tumblr API',
-      blog: data.blog,
-      photoset: data.posts[0].photos
+      blog: data,
+      posts: data.posts
     });
   });
 };

@@ -135,6 +135,7 @@ app.get('/account/unlink/:provider', passportConfig.isAuthenticated, userControl
 app.get('/scene', homeController.scene)
 app.get('/instagramdata', homeController.instagramData);
 app.get('/twitterdata', homeController.twitterData);
+app.get('/tumblrdata', homeController.tumblrData);
 
 /**
  * API examples routes.

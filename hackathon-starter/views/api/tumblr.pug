@@ -17,10 +17,10 @@ block content
       i.fa.fa-code-fork
       | API Endpoints
 
-  h3.text-primary #{blog.name}'s blog
+  h3.text-primary your dash
   .btn.btn-xs.btn-primary-outline
     i.fa.fa-file-text-o
-    | #{blog.posts} posts
+    | posts
   h4 Latest Photo Post
-  for photo in photoset
-    img.item(src=photo.original_size.url)
+  for post in posts
+    img.item(src=post.photos[0].alt_sizes[1].url)
