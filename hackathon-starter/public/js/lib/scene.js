@@ -1,5 +1,21 @@
 /* global AFRAME */
 
+
+var panels = {
+  group1: {
+    level1:{
+      position: "-3 -2 -3",
+      rotation: "0 45 0"
+    }
+  },
+  group3:{
+    level3:{
+      position: "-2 2 -2",
+      rotation: "0 -45 0"
+    }
+  }
+}
+
 /**
  * Component that listens to an event, fades out an entity, swaps the texture, and fades it
  * back in.
