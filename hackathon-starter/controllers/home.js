@@ -7,3 +7,9 @@ exports.index = (req, res) => {
     title: 'Home'
   });
 };
+
+exports.scene = (req, res) => {
+  res.render('scene', {
+    title: 'Scene'
+  });
+};
