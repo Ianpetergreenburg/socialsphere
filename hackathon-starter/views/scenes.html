@@ -37,8 +37,8 @@
             position="3 0 -3"
             rotation="0 -45 0">
         </a-mixin>
-                <a-mixin id="panel-level-1"
-            position="-3 0 -3"
+        <a-mixin id="panel-level-1"
+            position="-3 -2 -3"
             rotation="0 45 0">
         </a-mixin>
          <a-mixin id="panel-level-2"
@@ -46,7 +46,7 @@
             rotation="0 0 0">
         </a-mixin>
          <a-mixin id="panel-level-3"
-            position="3 0 -3"
+            position="3 2 -3"
             rotation="0 -45 0">
         </a-mixin>
         <a-mixin id="panel"
@@ -57,7 +57,7 @@
         </a-mixin>
     </a-assets>
       <!-- 360-degree image. -->
-      <a-sky id="image-360" radius="10" src="#city"></a-sky>
+      <a-sky id="image-360" radius="120" src="#city"></a-sky>
 
       <!-- Image links. -->
       <a-entity id="links" layout="type: line; margin: 1.5" position="0 -1 -4">
@@ -66,9 +66,27 @@
         <a-entity template="src: #link" data-src="#sechelt" data-thumb="#sechelt-thumb"></a-entity>
       </a-entity>
 
-<a-text mixin="panel panel-group-1 panel-level-1" value="text here"></a-text>
+<a-text mixin="panel panel-group-1" position="panel.group1.panel1.position" value="text here">
+    <!--<a-animation attribute="position"
+              
+               dur="4000"
+               fill="forwards"
+               from="panels.group1.level1.position"
+               to="0 2 0"
+               repeat="indefinite"></a-animation>-->
+</a-text>
 <a-text mixin="panel panel-group-2 panel-level-2" value="text here"></a-text>
-<a-text mixin="panel panel-group-3 panel-level-3" value="text here"></a-text>
+<a-text mixin="panel panel-group-3 panel-level-3" value="text here">
+      <!--<a-animation attribute="position"
+              
+               dur="4000"
+               fill="forwards"
+               from-"this.position"
+               to="panels.group3.level1"
+               easing="ease-out"
+               repeat="indefinite">
+      </a-animation>-->
+</a-text>
       <!-- Camera + cursor. -->
       <a-entity camera look-controls>
         <a-cursor id="cursor"
