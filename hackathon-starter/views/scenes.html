@@ -1,1 +1,82 @@
-<h1> SCENE </h1>
+<body>
+    <a-scene>
+      <a-assets>
+        <img id="city" crossorigin="anonymous" src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/city.jpg">
+        <img id="city-thumb" crossorigin="anonymous" src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/thumb-city.jpg">
+        <img id="cubes-thumb" crossorigin="anonymous" src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/thumb-cubes.jpg">
+        <img id="sechelt-thumb" crossorigin="anonymous" src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/thumb-sechelt.jpg">
+        <audio id="click-sound" crossorigin="anonymous" src="https://cdn.aframe.io/360-image-gallery-boilerplate/audio/click.ogg"></audio>
+        <img id="cubes" crossorigin="anonymous" src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/cubes.jpg">
+        <img id="sechelt" crossorigin="anonymous" src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/sechelt.jpg">
+
+        <!-- Image link template to be reused. -->
+        <script id="link" type="text/html">
+          <a-entity class="link"
+            geometry="primitive: plane; height: 1; width: 1"
+            material="shader: flat; src: ${thumb}"
+            event-set__1="_event: mousedown; scale: 1 1 1"
+            event-set__2="_event: mouseup; scale: 1.2 1.2 1"
+            event-set__3="_event: mouseenter; scale: 1.2 1.2 1"
+            event-set__4="_event: mouseleave; scale: 1 1 1"
+            set-image="on: click; target: #image-360; src: ${src}"
+            sound="on: click; src: #click-sound"></a-entity>
+        </script>
+    
+        <a-mixin id="red" material="color: red"></a-mixin>
+        <a-mixin id="blue" material="color: blue"></a-mixin>
+        <a-mixin id="cube" geometry="primitive: box"></a-mixin>
+        <a-mixin id="panel-group-1"
+            position="-3 0 -3"
+            rotation="0 45 0">
+        </a-mixin>
+         <a-mixin id="panel-group-2"
+            position="0 0 -4"
+            rotation="0 0 0">
+        </a-mixin>
+         <a-mixin id="panel-group-3"
+            position="3 0 -3"
+            rotation="0 -45 0">
+        </a-mixin>
+                <a-mixin id="panel-level-1"
+            position="-3 0 -3"
+            rotation="0 45 0">
+        </a-mixin>
+         <a-mixin id="panel-level-2"
+            position="0 0 -4"
+            rotation="0 0 0">
+        </a-mixin>
+         <a-mixin id="panel-level-3"
+            position="3 0 -3"
+            rotation="0 -45 0">
+        </a-mixin>
+        <a-mixin id="panel"
+                 geometry="primitive: box; height:1;width:3;depth:0.1;"
+                 text="yOffset:0.0;zOffset:0.1;xOffset:-0.1;color:white; align:center;" 
+                 material="color:blue;"
+                 >      
+        </a-mixin>
+    </a-assets>
+      <!-- 360-degree image. -->
+      <a-sky id="image-360" radius="10" src="#city"></a-sky>
+
+      <!-- Image links. -->
+      <a-entity id="links" layout="type: line; margin: 1.5" position="0 -1 -4">
+        <a-entity template="src: #link" data-src="#cubes" data-thumb="#cubes-thumb"></a-entity>
+        <a-entity template="src: #link" data-src="#city" data-thumb="#city-thumb"></a-entity>
+        <a-entity template="src: #link" data-src="#sechelt" data-thumb="#sechelt-thumb"></a-entity>
+      </a-entity>
+
+<a-text mixin="panel panel-group-1 panel-level-1" value="text here"></a-text>
+<a-text mixin="panel panel-group-2 panel-level-2" value="text here"></a-text>
+<a-text mixin="panel panel-group-3 panel-level-3" value="text here"></a-text>
+      <!-- Camera + cursor. -->
+      <a-entity camera look-controls>
+        <a-cursor id="cursor"
+          animation__click="property: scale; startEvents: click; from: 0.1 0.1 0.1; to: 1 1 1; dur: 150"
+          animation__fusing="property: fusing; startEvents: fusing; from: 1 1 1; to: 0.1 0.1 0.1; dur: 1500"
+          event-set__1="_event: mouseenter; color: springgreen"
+          event-set__2="_event: mouseleave; color: black"
+          raycaster="objects: .link"></a-cursor>
+      </a-entity>
+    </a-scene>
+  </body>
