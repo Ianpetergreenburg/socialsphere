@@ -12,6 +12,7 @@ exports.index = (req, res) => {
 
 const async = require('async');
 const ig = require('instagram-node').instagram();
+const Twit = require('twit');
 
 exports.scene = (req, res, next) => {
   const token = req.user.tokens.find(token => token.kind === 'instagram');
@@ -65,5 +66,20 @@ exports.instagramData = (req, res, next) => {
   }, (err, results) => {
     if (err) { return next(err); }
     res.send({ myRecentMedia: results.myRecentMedia });
+  });
+};
+
+exports.twitterData = (req, res, next) => {
+  const token = req.user.tokens.find(token => token.kind === 'twitter');
+  const T = new Twit({
+    consumer_key: process.env.TWITTER_KEY,
+    consumer_secret: process.env.TWITTER_SECRET,
+    access_token: token.accessToken,
+    access_token_secret: token.tokenSecret
+  });
+
+  T.get('/statuses/home_timeline', {count: 10}, (err, reply) => {
+    if (err) { return next(err); }
+    res.send({tweets: reply});
   });
 };

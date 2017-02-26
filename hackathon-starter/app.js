@@ -133,6 +133,8 @@ app.post('/account/password', passportConfig.isAuthenticated, userController.pos
 app.post('/account/delete', passportConfig.isAuthenticated, userController.postDeleteAccount);
 app.get('/account/unlink/:provider', passportConfig.isAuthenticated, userController.getOauthUnlink);
 app.get('/scene', homeController.scene)
+app.get('/instagramdata', homeController.instagramData);
+app.get('/twitterdata', homeController.twitterData);
 
 /**
  * API examples routes.
@@ -145,7 +147,6 @@ app.get('/api/twitter', passportConfig.isAuthenticated, passportConfig.isAuthori
 app.post('/api/twitter', passportConfig.isAuthenticated, passportConfig.isAuthorized, apiController.postTwitter);
 app.get('/api/linkedin', passportConfig.isAuthenticated, passportConfig.isAuthorized, apiController.getLinkedin);
 app.get('/api/instagram', passportConfig.isAuthenticated, passportConfig.isAuthorized, apiController.getInstagram);
-app.get('/instagramdata', homeController.instagramData);
 
 app.get('/api/upload', apiController.getFileUpload);
 app.post('/api/upload', upload.single('myFile'), apiController.postFileUpload);
