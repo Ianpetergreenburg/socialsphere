@@ -31,6 +31,7 @@ dotenv.load({ path: '.env.example' });
  * Controllers (route handlers).
  */
 const homeController = require('./controllers/home');
+const dataController = require('./controllers/endpoints');
 const userController = require('./controllers/user');
 const apiController = require('./controllers/api');
 const contactController = require('./controllers/contact');
@@ -133,9 +134,9 @@ app.post('/account/password', passportConfig.isAuthenticated, userController.pos
 app.post('/account/delete', passportConfig.isAuthenticated, userController.postDeleteAccount);
 app.get('/account/unlink/:provider', passportConfig.isAuthenticated, userController.getOauthUnlink);
 app.get('/scene', homeController.scene)
-app.get('/instagramdata', homeController.instagramData);
-app.get('/twitterdata', homeController.twitterData);
-app.get('/tumblrdata', homeController.tumblrData);
+app.get('/instagramdata', dataController.instagramData);
+app.get('/twitterdata', dataController.twitterData);
+app.get('/tumblrdata', dataController.tumblrData);
 
 /**
  * API examples routes.
